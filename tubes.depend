@@ -1,0 +1,47 @@
+# depslib dependency file v1.0
+1490103063 source:d:\c++\tubes\dosen.cpp
+	"dosen.h"
+	<iostream>
+
+1490103038 d:\c++\tubes\dosen.h
+	<iostream>
+
+1489374070 d:\c++\tubes\relasi.h
+	"matakuliah.h"
+	"dosen.h"
+	<iostream>
+
+1489279959 d:\c++\tubes\matakuliah.h
+	<stdio.h>
+	<iostream>
+
+1489279959 source:d:\c++\tubes\main.cpp
+	<iostream>
+	<stdio.h>
+	"dosen.h"
+	"matakuliah.h"
+	"relasi.h"
+	"menu.h"
+
+1489372885 source:d:\c++\tubes\matkul.cpp
+	"matakuliah.h"
+	<iostream>
+
+1490437674 d:\c++\tubes\menu.h
+	"dosen.h"
+	"matakuliah.h"
+	"relasi.h"
+	<stdlib.h>
+	<conio.h>
+
+1490437696 source:d:\c++\tubes\menu.cpp
+	"dosen.h"
+	"matakuliah.h"
+	"relasi.h"
+	"menu.h"
+
+1490770981 source:d:\c++\tubes\relasi.cpp
+	"matakuliah.h"
+	"dosen.h"
+	"relasi.h"
+
