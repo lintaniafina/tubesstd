@@ -339,8 +339,8 @@ void deleterelasi(List_r &LR,List_dosen LD,List_matkul LM){
         }
         }else{
         cout << endl << "Gagal menghapus relasi" << endl;
-        getch();
     }
+    getch();
 }
 void findDosen(List_dosen &L){
     infotypedosen P;
