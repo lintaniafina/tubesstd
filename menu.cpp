@@ -172,7 +172,7 @@ void inputmatkul(List_matkul &LM,List_r &LR,List_dosen LD){
             clearscreen();
             cout << "Membuat relasi antara dosen dengan mata kuliah setelah berhasil di insert" << endl;
             infotypedosen D;
-            cout << "Nama dosen yang mengajar" << P.nama_matkul << " : ";
+            cout << "Nama dosen yang mengajar " << P.nama_matkul << " : ";
             cin >> D.nama;
             cout << "No telp dosen yang mengajar " << P.nama_matkul << " : ";
             cin >> D.no_telp;
@@ -255,7 +255,7 @@ void inputrelasi(List_r &LR,List_dosen LD,List_matkul LM){
             cout << endl << "Gagal menambahkan relasi, relasi sudah ada" << endl;
         }else{
             int j = Hitungmatkuldaridosen(LR, D);
-            if(j < 5){
+            if(j < 3){
                 insertRelasi(LR, alokasirelasi(R));
                 cout << endl << "Berhasil menambahkan relasi" << endl;
             }else{
@@ -268,6 +268,7 @@ void inputrelasi(List_r &LR,List_dosen LD,List_matkul LM){
     }
 
 void deletedosen(List_dosen &D,List_r &R){
+    clearscreen();
     infotypedosen P;
     infotype_r Q;
     cout<<"Delete Dosen"<<endl;
@@ -286,8 +287,10 @@ void deletedosen(List_dosen &D,List_r &R){
     }
     deleteDosen(D,P);
     cout<<endl<<"Data"<<" "<<P.nama<<" "<<"telah dihapus dari list dosen"<<endl;
+    getch();
 }
 void deletematkul(List_matkul &M,List_r &R){
+    clearscreen();
     infotypematkul P;
     infotype_r Q;
     cout<<"Delete Mata Kuliah"<<endl;
@@ -306,6 +309,7 @@ void deletematkul(List_matkul &M,List_r &R){
     }
     deleteMatkul(M,P);
     cout<<endl<<"Data"<<" "<<P.nama_matkul<<" "<<"telah dihapus dari list matkul"<<endl;
+    getch();
 }
 void deleterelasi(List_r &LR,List_dosen LD,List_matkul LM){
     clearscreen();
@@ -335,6 +339,7 @@ void deleterelasi(List_r &LR,List_dosen LD,List_matkul LM){
         }
         }else{
         cout << endl << "Gagal menghapus relasi" << endl;
+        getch();
     }
 }
 void findDosen(List_dosen &L){
@@ -445,9 +450,7 @@ void printRel(List_dosen LD,List_matkul LM,List_r LR){
     do{
         cout << "Pilih menu : ";
         cin >> i;
-        /*if (i==1){
-            printdosenmatkul (LD,LR);
-        }else */if(i >= 0 && i <= 3){
+        if(i >= 0 && i <= 3){
             stop = true;
         }else{
             cout << "Input salah" << endl;
