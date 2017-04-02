@@ -360,7 +360,6 @@ void findDosen(List_dosen &L){
     //cout << "Masukkan nomor telepon dosen yang akan dicari : ";
     //cin >> P.no_telp;
     adr_dosen Q = searchdosen(L, P);
-    adr_dosen X=finddosen(L,P);
     if(Q != nil){
         cout << "Dosen " << Q->info.nama << " ada di dalam list, dengan data" << endl;
         cout << "Nama         : "<<Q->info.nama<<endl;
