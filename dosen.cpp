@@ -47,6 +47,21 @@ adr_dosen finddosen(List_dosen L, infotypedosen P){
         return nil;
     }
 }
+adr_dosen searchdosen(List_dosen L, infotypedosen P){
+    if(first(L) != nil && P.nama != "" /*&& P.no_telp != ""*/){
+        adr_dosen q = first(L);
+        while(next(q) != nil &&  info(q).nama != P.nama /*&& info(q).no_telp != P.no_telp*/){
+            q = next(q);
+        }
+        if(info(q).nama == P.nama /*&& info(q).no_telp == P.no_telp*/){
+            return q;
+        }else{
+            return nil;
+        }
+    }else{
+        return nil;
+    }
+}
 void insertDosen(List_dosen &L, adr_dosen P){
     if(first(L) != nil){
         next(P) = first(L);

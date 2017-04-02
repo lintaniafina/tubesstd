@@ -1,9 +1,9 @@
 # depslib dependency file v1.0
-1490103063 source:d:\c++\tubes\dosen.cpp
+1491024231 source:d:\c++\tubes\dosen.cpp
 	"dosen.h"
 	<iostream>
 
-1490103038 d:\c++\tubes\dosen.h
+1491051484 d:\c++\tubes\dosen.h
 	<iostream>
 
 1489374070 d:\c++\tubes\relasi.h
@@ -23,18 +23,18 @@
 	"relasi.h"
 	"menu.h"
 
-1489372885 source:d:\c++\tubes\matkul.cpp
+1491106788 source:d:\c++\tubes\matkul.cpp
 	"matakuliah.h"
 	<iostream>
 
-1490437674 d:\c++\tubes\menu.h
+1491050338 d:\c++\tubes\menu.h
 	"dosen.h"
 	"matakuliah.h"
 	"relasi.h"
 	<stdlib.h>
 	<conio.h>
 
-1490931800 source:d:\c++\tubes\menu.cpp
+1491106656 source:d:\c++\tubes\menu.cpp
 	"dosen.h"
 	"matakuliah.h"
 	"relasi.h"

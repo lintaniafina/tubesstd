@@ -149,12 +149,12 @@ void printmatkul(List_matkul L){
     }
 }
 adr_matkul findmatkul(List_matkul L, infotypematkul P){
-    if(first(L) != nil && P.nama_matkul != "" && P.deskripsi != ""){
+    if(first(L) != nil && P.nama_matkul != ""){
         adr_matkul q = first(L);
-        while(next(q) != nil &&  info(q).nama_matkul != P.nama_matkul && info(q).deskripsi != P.deskripsi){
+        while(next(q) != nil &&  info(q).nama_matkul != P.nama_matkul){
             q = next(q);
         }
-        if(info(q).nama_matkul == P.nama_matkul && info(q).deskripsi== P.deskripsi){
+        if(info(q).nama_matkul == P.nama_matkul){
             return q;
         }else{
             return nil;

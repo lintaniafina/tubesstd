@@ -10,9 +10,9 @@ int inputmenu(){
     bool stop=false;
     clearscreen();
     cout << "Menu" << endl;
-    cout << "1. Insert" << endl;
-    cout << "2. Delete" << endl;
-    cout << "3. Print" << endl;
+    cout << "1. Print" << endl;
+    cout << "2. Insert" << endl;
+    cout << "3. Delete" << endl;
     cout << "4. Find" << endl;
     cout << "0. Exit" << endl;
     cout << "Pilih menu : " ;
@@ -51,35 +51,6 @@ int inputsubmenu(){
 void menu(int inputmenu, int sub, List_dosen &LD, List_matkul &LM, List_r &LR){
     switch (inputmenu) {
     case 1:
-        switch (sub) {
-        case 1:
-            inputdosen(LD);
-            getch();
-        break;
-        case 2:
-            inputmatkul(LM,LR,LD);
-            getch();
-        break;
-        case 3:
-            inputrelasi(LR,LD,LM);
-            getch();
-        break;
-        }
-    break;
-    case 2:
-        switch (sub){
-        case 1:
-            deletedosen(LD,LR);
-        break;
-        case 2:
-            deletematkul(LM,LR);
-        break;
-        case 3:
-            deleterelasi(LR,LD,LM);
-        break;
-        }
-    break;
-    case 3:
         switch (sub){
         case 1:
             clearscreen();
@@ -100,6 +71,38 @@ void menu(int inputmenu, int sub, List_dosen &LD, List_matkul &LM, List_r &LR){
             getch();
         break;
         }
+    break;
+    case 2:
+
+        switch (sub) {
+        case 1:
+            inputdosen(LD);
+            getch();
+        break;
+        case 2:
+            inputmatkul(LM,LR,LD);
+            getch();
+        break;
+        case 3:
+            inputrelasi(LR,LD,LM);
+            getch();
+        break;
+        }
+    break;
+    case 3:
+
+        switch (sub){
+        case 1:
+            deletedosen(LD,LR);
+        break;
+        case 2:
+            deletematkul(LM,LR);
+        break;
+        case 3:
+            deleterelasi(LR,LD,LM);
+        break;
+        }
+
     break;
     case 4:
         switch (sub){
@@ -148,14 +151,20 @@ void inputdosen(List_dosen &L){
     cin>>P.nama;
     cout<<"No telp dosen : ";
     cin>>P.no_telp;
-    insertDosen(L,alokasidosen(P));
+    adr_dosen D = finddosen(L, P);
+    if(D!= nil){
+        cout << endl << "Tidak dapat menambahkan data kedalam list dosen, karena data sudah ada" << endl;
+        getch();
+    }else{
+    insertFirstdosen(L,alokasidosen(P));
     cout<<"Data dosen telah ditambahakan dalam list dosen"<<endl;
+    }
 }
 void inputmatkul(List_matkul &LM,List_r &LR,List_dosen LD){
     infotypematkul P;
     clearscreen();
     bool stop = false;
-    bool stopYN = false;
+    bool yesno = false;
     string X;
     cout << "Masukkan data matkul" << endl;
     cout << "Nama matkul : ";
@@ -164,10 +173,10 @@ void inputmatkul(List_matkul &LM,List_r &LR,List_dosen LD){
     cin >> P.deskripsi;
     adr_matkul M = findmatkul(LM, P);
     if(M != nil){
-        cout << endl << "Gagal menambahkan data kedalam list matkul, karena data sudah ada" << endl;
+        cout << endl << "Tidak dapat menambahkan data kedalam list matkul, karena data sudah ada" << endl;
         getch();
     }else{
-        insertMatkul(LM,alokasimatkul(P));
+        insertFirstmatkul(LM,alokasimatkul(P));
         do{
             clearscreen();
             cout << "Membuat relasi antara dosen dengan mata kuliah setelah berhasil di insert" << endl;
@@ -184,49 +193,49 @@ void inputmatkul(List_matkul &LM,List_r &LR,List_dosen LD){
                 R.addressMatkul = MK;
                 adr_relasi Relasi = findrelasi(LR, R);
                 if(Relasi != nil){
-                    cout << endl << "Gagal menambahkan relasi, relasi sudah ada" << endl;
+                    cout << endl << "Tidak dapat menambahkan relasi, relasi sudah ada" << endl;
                     getch();
                 }else{
                     int j = Hitungmatkuldaridosen(LR, D);
                     if(j < 3){
                         insertRelasi(LR, alokasirelasi(R));
                         stop = true;
-                        cout << endl << "Berhasil menambahkan data matkul dalam list matkul sekaligus membuat relasi" << endl << endl;
+                        cout << endl << "Berhasil menambahkan data matkul dalam list matkul dan juga membuat relasinya" << endl << endl;
                         getch();
                     }else{
-                        cout << endl << "Gagal menambahkan relasi, karna sudah penuh" << endl;
+                        cout << endl << "Tidak dapat menambahkan relasi, karna sudah penuh" << endl;
                         do{
-                            cout << "Input lagi ? (y/n) : ";
+                            cout << "Input lagi ? Yes/No : ";
                             cin >> X;
-                            if(X == "y" || X == "Y"){
-                                stopYN = true;
-                            }else if(X == "n" || X == "N"){
-                                stopYN = true;
+                            if(X == "yes" || X == "YES"||X == "Yes"){
+                                yesno = true;
+                            }else if(X == "no" || X == "NO"||X=="No"){
+                                yesno = true;
                                 stop = true;
                                 deleteMatkul(LM, P);
                             }else{
-                                cout << "Ulang lagi" << endl;
-                                stopYN = false;
+                                cout << "Coba lagi" << endl;
+                                yesno = false;
                             }
-                        }while(stopYN != true);
+                        }while(yesno != true);
                     }
                 }
             }else{
-                cout << endl << "Gagal menambahkan relasi, dosen sudah ada dalam list" << endl;
+                cout << endl << "Tidak bisa menambahkan relasi, dosen sudah ada dalam list" << endl;
                 do{
-                    cout << "Input lagi ? (y/n) : ";
+                    cout << "Input lagi ? (Yes/No) : ";
                     cin >> X;
-                    if(X== "y" || X == "Y"){
-                        stopYN = true;
-                    }else if(X == "n" || X == "N"){
-                        stopYN = true;
+                    if(X == "yes" || X == "YES"||X == "Yes"){
+                        yesno = true;
+                    }else if(X == "no" || X == "NO"||X=="No"){
+                        yesno = true;
                         stop = true;
                         deleteMatkul(LM, P);
                     }else{
-                        cout << "Input salah, harus y atau n" << endl;
-                        stopYN = false;
+                        cout << "Masukkan Yes/No" << endl;
+                        yesno = false;
                     }
-                }while(stopYN != true);
+                }while(yesno != true);
             }
         }while(stop != true);
 }
@@ -252,18 +261,18 @@ void inputrelasi(List_r &LR,List_dosen LD,List_matkul LM){
         R.addressMatkul = MK;
         adr_relasi rel = findrelasi(LR, R);
         if(rel != nil){
-            cout << endl << "Gagal menambahkan relasi, relasi sudah ada" << endl;
+            cout << endl << "Tidak dapat menambahkan relasi,karena relasi sudah ada" << endl;
         }else{
             int j = Hitungmatkuldaridosen(LR, D);
             if(j < 3){
                 insertRelasi(LR, alokasirelasi(R));
                 cout << endl << "Berhasil menambahkan relasi" << endl;
             }else{
-                cout << endl << "Gagal menambahkan relasi, karna sudah penuh" << endl;
+                cout << endl << "Tidak dapat menambahkan relasi, karna sudah penuh" << endl;
             }
         }
     }else{
-        cout << endl << "Gagal menambahkan relasi" << endl;
+        cout << endl << "Tidak dapat menambahkan relasi" << endl;
 }
     }
 
@@ -286,7 +295,7 @@ void deletedosen(List_dosen &D,List_r &R){
         S = next(S);
     }
     deleteDosen(D,P);
-    cout<<endl<<"Data"<<" "<<P.nama<<" "<<"telah dihapus dari list dosen"<<endl;
+    cout<<endl<<"Data "<<P.nama<<" "<<"telah dihapus dari list dosen"<<endl;
     getch();
 }
 void deletematkul(List_matkul &M,List_r &R){
@@ -329,7 +338,7 @@ void deleterelasi(List_r &LR,List_dosen LD,List_matkul LM){
     if(P != nil && Q != nil){
         int j = Hitungdosendarimatkul(LR, M);
         if(j == 1){
-            cout << "Gagal menghapus relasi mata kuliah " << M.nama_matkul << " karna satu mata kuliah diajar oleh minimal 1 dosen" << endl;
+            cout << "Tidak dapat menghapus relasi mata kuliah " << M.nama_matkul << " karna satu mata kuliah diajar oleh minimal 1 dosen" << endl;
         }else{
             infotype_r  r;
             r.addressDosen= P;
@@ -338,7 +347,7 @@ void deleterelasi(List_r &LR,List_dosen LD,List_matkul LM){
             cout << endl << "Berhasil menghapus relasi" << endl;
         }
         }else{
-        cout << endl << "Gagal menghapus relasi" << endl;
+        cout << endl << "Tidak dapat menghapus relasi" << endl;
     }
     getch();
 }
@@ -348,14 +357,17 @@ void findDosen(List_dosen &L){
     cout << "Mencari data dosen" << endl;
     cout << "Masukkan nama dosen yang akan dicari : ";
     cin >> P.nama;
-    cout << "Masukkan nomor telepon dosen yang akan dicari : ";
-    cin >> P.no_telp;
-    adr_dosen Q = finddosen(L, P);
+    //cout << "Masukkan nomor telepon dosen yang akan dicari : ";
+    //cin >> P.no_telp;
+    adr_dosen Q = searchdosen(L, P);
+    adr_dosen X=finddosen(L,P);
     if(Q != nil){
-        cout << "Dosen " << P.nama << " ada di dalam list" << endl;
+        cout << "Dosen " << Q->info.nama << " ada di dalam list, dengan data" << endl;
+        cout << "Nama         : "<<Q->info.nama<<endl;
+        cout << "Nomor telepon: "<<Q->info.no_telp<<endl;
     }else{
         cout << "Dosen " << P.nama << " tidak ada di dalam list" << endl;
-}
+    }
 }
 void findMatkul(List_matkul &L){
     infotypematkul P;
@@ -363,14 +375,14 @@ void findMatkul(List_matkul &L){
     cout << "Mencari data matkul" << endl;
     cout << "Masukkan nama matkul yang akan dicari : ";
     cin >> P.nama_matkul;
-    cout << "Masukkan deskripsi yang akan dicari : ";
-    cin >> P.deskripsi;
     adr_matkul Q = findmatkul(L, P);
     if(Q != nil){
-        cout << "Dosen " << P.nama_matkul << " ada di dalam list" << endl;
+        cout << "Matakuliah " << Q->info.nama_matkul << " ada di dalam list, dengan data" << endl;
+        cout << "Matakuliah: "<< Q->info.nama_matkul<<endl;
+        cout << "Deskripsi : "<< Q->info.deskripsi<<endl;
     }else{
-        cout << "Dosen " << P.nama_matkul<< " tidak ada di dalam list" << endl;
-}
+        cout << "Matakuliah " << P.nama_matkul<< " tidak ada di dalam list" << endl;
+    }
 }
 void findRelasi(List_r &R,List_dosen D,List_matkul M){
     clearscreen();
@@ -378,45 +390,44 @@ void findRelasi(List_r &R,List_dosen D,List_matkul M){
     infotypedosen i;
     cout << "Masukkan nama dosen : ";
     cin >> i.nama;
-    cout << "Masukkan nomor telepon dosen : ";
-    cin >> i.no_telp;
-    adr_dosen P = finddosen(D,i);
+    adr_dosen P = searchdosen(D,i);
     infotypematkul s;
     cout << "Masukkan nama matkul : ";
     cin >> s.nama_matkul;
-    cout << "Masukkan alamat matkul : ";
-    cin >> s.deskripsi;
     adr_matkul Q = findmatkul(M, s);
+    //cout<<Q->info.nama_matkul;
     if(P != nil && Q != nil){
         infotype_r r;
         r.addressDosen = P;
         r.addressMatkul =Q;
         adr_relasi relasi = findrelasi(R, r);
         if(relasi != nil){
-            cout << "Relasi antara dosen " << i.nama << " dan matkul " << s.nama_matkul << " ada di dalam list" << endl;
+            cout << "Relasi antara dosen " << P->info.nama << " dan matkul " << Q->info.nama_matkul << " ada di dalam list" << endl;
+            cout << "Dosen "<<P->info.nama<<" mempunyai nomor telepon "<<P->info.no_telp<<" dan mengampu matakuliah "<<Q->info.nama_matkul<<endl;
+            cout << "Yaitu matakuliah dengan deskripsi: "<<Q->info.deskripsi<<endl;
         }else{
             cout << "Relasi antara dosen " << i.nama << " dan matkul " << s.nama_matkul << " tidak ada di dalam list" << endl;
         }
     }else{
         cout << "Relasi antara dosen" << i.nama << " dan matkul " << s.nama_matkul << " tidak ada di dalam list" << endl;
-}
+    }
 }
 void printmat(List_r LR, List_matkul LM){
     bool stop = false;
     int i;
     clearscreen();
     cout << "Pilih apa yang akan ditampilkan dari list matkul" << endl;
-    cout << "1. Tampilkan semua matkul" << endl;
-    cout << "2. Tampilkan matkul dengan dosen terbanyak" << endl;
-    cout << "3. Tampilkan matkul dengan dosen tersedikit" << endl;
-    cout << "0. Back" << endl;
+    cout << "1. Print semua matkul" << endl;
+    cout << "2. Print matkul dengan dosen tersedikit" << endl;
+    cout << "3. Print matkul dengan dosen terbanyak" << endl;
+    cout << "0. Kembali" << endl;
     do{
         cout << "Pilih menu : ";
         cin >> i;
         if(i >= 0 && i <= 3){
             stop = true;
         }else{
-            cout << "Input salah" << endl;
+            cout << "Ulangi" << endl;
         }
     }while(stop != true);
     switch(i){
@@ -427,13 +438,14 @@ void printmat(List_r LR, List_matkul LM){
         getch();
     break;
     case 2:
+
         clearscreen();
-        Matkuldgnmaksdosen(LR, LM);
+        MatkuldgnMindosen(LR, LM);
         getch();
     break;
     case 3:
         clearscreen();
-        MatkuldgnMindosen(LR, LM);
+        Matkuldgnmaksdosen(LR, LM);
         getch();
     break;
     }
@@ -443,17 +455,17 @@ void printRel(List_dosen LD,List_matkul LM,List_r LR){
     int i;
     clearscreen();
     cout << "Pilih apa yang akan ditampilkan dari list relasi" << endl;
-    cout << "1. Tampilkan semua relasi" << endl;
-    cout << "2. Tampilkan matkul berdasarkan dosen tertentu" << endl;
-    cout << "3. Tampilkan dosen berdasarkan matkul tertentu" << endl;
-    cout << "0. Back" << endl;
+    cout << "1. Print semua relasi" << endl;
+    cout << "2. Print matkul berdasarkan dosen tertentu" << endl;
+    cout << "3. Print dosen berdasarkan matkul tertentu" << endl;
+    cout << "0. Kembali" << endl;
     do{
         cout << "Pilih menu : ";
         cin >> i;
         if(i >= 0 && i <= 3){
             stop = true;
         }else{
-            cout << "Input salah" << endl;
+            cout << "Ulangi" << endl;
         }
     }while(stop != true);
     switch(i){
@@ -481,13 +493,13 @@ void printmatkuldaridosentertentu(List_r &LR){
     cout << "Print matkul berdasarkan dosen tertentu" << endl;
     cout << "Masukkan nama dosen : ";
     cin >> D.nama;
-    cout << "Masukkan nomor telepon dosen : ";
-    cin >> D.no_telp;
+    //cout << "Masukkan nomor telepon dosen : ";
+    //cin >> D.no_telp;
     if(first(LR) != nil && last(LR) != nil){
         adr_relasi q = first(LR);
         int j = 1;
         while(q != nil){
-            if(info(addressDosen(q)).nama == D.nama && info(addressDosen(q)).no_telp == D.no_telp){
+            if(info(addressDosen(q)).nama == D.nama /*&& info(addressDosen(q)).no_telp == D.no_telp*/){
                 cout << "Matkul " << j << "." << endl;
                 cout << "Nama Matkul : " << info(addressMatkul(q)).nama_matkul<< endl;
                 cout << "Deskripsi : " << info(addressMatkul(q)).deskripsi << endl;
@@ -528,13 +540,13 @@ void printdosendarimatkultertentu(List_r &LR){
     cout << "Print Dosen berdasarkan matkul tertentu" << endl;
     cout << "Masukkan nama matkul: ";
     cin >> M.nama_matkul;
-    cout << "Masukkan deskripsi matkul: ";
-    cin >> M.deskripsi;
+    //cout << "Masukkan deskripsi matkul: ";
+    //cin >> M.deskripsi;
     if(first(LR) != nil && last(LR) != nil){
         adr_relasi q=first(LR);
         int j = 1;
         while(q != nil){
-            if(info(addressMatkul(q)).nama_matkul == M.nama_matkul && info(addressMatkul(q)).deskripsi == M.deskripsi){
+            if(info(addressMatkul(q)).nama_matkul == M.nama_matkul /*&& info(addressMatkul(q)).deskripsi == M.deskripsi*/){
                 cout << "Dosen " << j << "." << endl;
                 cout << "Nama Dosen : " << info(addressDosen(q)).nama << endl;
                 cout << "Nomor telepon Dosen : " << info(addressDosen(q)).no_telp << endl;
@@ -548,7 +560,7 @@ void printdosendarimatkultertentu(List_r &LR){
     }else{
         cout << "List relasi kosong" << endl;
     }/*
-   clearscreen();
+    clearscreen();
     adr_dosen D=first(LD);
     while (D!=NULL){
         cout<<"Nama Dosen : "<<info(D).nama<<endl;
@@ -564,7 +576,54 @@ void printdosendarimatkultertentu(List_r &LR){
     }*/
 }
 
-/* Fungsi operasi list relasi */
+void Matkuldgnmaksdosen(List_r LR, List_matkul LM){
+    if(first(LR) != nil && first(LM)){
+        int maxx,i;
+        adr_matkul q = first(LM);
+        adr_matkul address_max = first(LM);
+        while(q != nil){
+            infotypematkul M;
+            M.nama_matkul = info(q).nama_matkul;
+            M.deskripsi = info(q).deskripsi;
+            i = Hitungdosendarimatkul(LR, M);
+            if(q == first(LM)){
+                maxx = i;
+            }else if(i > maxx){
+                maxx = i;
+                address_max = q;
+            }
+            q = next(q);
+        }
+        cout << "Matkul dengan dosen terbanyak : " << info(address_max).nama_matkul << endl;
+        cout << "Dengan jumlah dosen " << maxx << endl;
+    }else{
+        cout << "List Matkul kosong" << endl;
+    }
+}
+void MatkuldgnMindosen(List_r LR, List_matkul LM){
+    if(first(LR) != nil && first(LM)){
+        int minn,i;
+        adr_matkul q = first(LM);
+        adr_matkul address_min = first(LM);
+        while(q != nil){
+            infotypematkul M;
+            M.nama_matkul = info(q).nama_matkul;
+            M.deskripsi = info(q).deskripsi;
+            i = Hitungdosendarimatkul(LR, M);
+            if(q == first(LM)){
+                minn = i;
+            }else if(i < minn){
+                minn = i;
+                address_min = q;
+            }
+            q = next(q);
+        }
+        cout << "Matkul dengan dosen tesedikit adalah " << info(address_min).nama_matkul << endl;
+        cout << "Dengan jumlah dosen " << minn << endl;
+    }else{
+        cout << "List matkul kosong" << endl;
+    }
+}
 int Hitungmatkuldaridosen(List_r L, infotypedosen D){
     if(first(L) != nil && last(L) != nil){
         adr_relasi q = first(L);
@@ -595,52 +654,3 @@ int Hitungdosendarimatkul(List_r L, infotypematkul M){
         return 0;
     }
 }
-void Matkuldgnmaksdosen(List_r LR, List_matkul LM){
-    if(first(LR) != nil && first(LM)){
-        int maxx,i;
-        adr_matkul q = first(LM);
-        adr_matkul address_max = first(LM);
-        while(q != nil){
-            infotypematkul M;
-            M.nama_matkul = info(q).nama_matkul;
-            M.deskripsi = info(q).deskripsi;
-            i = Hitungdosendarimatkul(LR, M);
-            if(q == first(LM)){
-                maxx = i;
-            }else if(i > maxx){
-                maxx = i;
-                address_max = q;
-            }
-            q = next(q);
-        }
-        cout << "Matkul dengan dosen terbanyak adalah " << info(address_max).nama_matkul << endl;
-        cout << "Dengan jumlah dosen " << maxx << endl;
-    }else{
-        cout << "List Matkul kosong" << endl;
-    }
-}
-void MatkuldgnMindosen(List_r LR, List_matkul LM){
-    if(first(LR) != nil && first(LM)){
-        int minn,i;
-        adr_matkul q = first(LM);
-        adr_matkul address_min = first(LM);
-        while(q != nil){
-            infotypematkul M;
-            M.nama_matkul = info(q).nama_matkul;
-            M.deskripsi = info(q).deskripsi;
-            i = Hitungdosendarimatkul(LR, M);
-            if(q == first(LM)){
-                minn = i;
-            }else if(i < minn){
-                minn = i;
-                address_min = q;
-            }
-            q = next(q);
-        }
-        cout << "Matkul dengan dosen tesedikit adalah " << info(address_min).nama_matkul << endl;
-        cout << "Dengan jumlah dosen " << minn << endl;
-    }else{
-        cout << "List matkul kosong" << endl;
-    }
-}
-

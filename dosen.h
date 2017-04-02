@@ -11,7 +11,6 @@ using namespace std;
 #define info(P) (P)-> info
 #define nil NULL
 struct dosen {
-    int id;
     string nama;
     string no_telp;
 };
@@ -39,6 +38,7 @@ void deleteLastdosen(List_dosen &L);
 void deleteAfterdosen(List_dosen &L, adr_dosen Prec);
 void deleteDosen(List_dosen &L, infotypedosen D);
 void printdosen(List_dosen L);
+adr_dosen searchdosen(List_dosen L, infotypedosen P);
 
 adr_dosen finddosen(List_dosen L, infotypedosen P);
 #endif // DOSEN_H_INCLUDED
