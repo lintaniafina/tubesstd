@@ -22,7 +22,7 @@ void printMatkul();
 void printRelasi();
 void findDosen(List_dosen &L);
 void findMatkul(List_matkul &L);
-void findRelasi(List_r &R,List_dosen D,List_matkul M);
+void findRelasi(List_r &LR,List_dosen LD,List_matkul LM);
 void printmat(List_r LR, List_matkul LM);
 void printRel(List_dosen LD,List_matkul LM,List_r LR);
 void printmatkuldaridosentertentu(List_r &LR);

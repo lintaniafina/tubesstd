@@ -9,7 +9,6 @@
 #define nil NULL
 using namespace std;
 struct matkul {
-    int id;
     string nama_matkul;
     string deskripsi;
     int nDosen;

@@ -19,7 +19,6 @@ typedef struct elmlist_dosen *adr_dosen;
 struct elmlist_dosen{
     infotypedosen info;
     adr_dosen next;
-    //adr_relasi mengajar;
 };
 struct List_dosen{
     adr_dosen first;
