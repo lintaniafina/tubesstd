@@ -3,7 +3,7 @@
 	"dosen.h"
 	<iostream>
 
-1491051484 d:\c++\tubes\dosen.h
+1491179150 d:\c++\tubes\dosen.h
 	<iostream>
 
 1489374070 d:\c++\tubes\relasi.h
@@ -11,7 +11,7 @@
 	"dosen.h"
 	<iostream>
 
-1489279959 d:\c++\tubes\matakuliah.h
+1491179150 d:\c++\tubes\matakuliah.h
 	<stdio.h>
 	<iostream>
 
@@ -23,7 +23,7 @@
 	"relasi.h"
 	"menu.h"
 
-1491106788 source:d:\c++\tubes\matkul.cpp
+1491488874 source:d:\c++\tubes\matkul.cpp
 	"matakuliah.h"
 	<iostream>
 
@@ -34,13 +34,59 @@
 	<stdlib.h>
 	<conio.h>
 
-1491106656 source:d:\c++\tubes\menu.cpp
+1491488874 source:d:\c++\tubes\menu.cpp
 	"dosen.h"
 	"matakuliah.h"
 	"relasi.h"
 	"menu.h"
 
 1490845157 source:d:\c++\tubes\relasi.cpp
+	"matakuliah.h"
+	"dosen.h"
+	"relasi.h"
+
+1491024231 source:d:\c++\tugas besar kelompok 5\tugas besar multi linked list_dosen dan mata kuliah\dosen.cpp
+	"dosen.h"
+	<iostream>
+
+1491179150 d:\c++\tugas besar kelompok 5\tugas besar multi linked list_dosen dan mata kuliah\dosen.h
+	<iostream>
+
+1489279959 source:d:\c++\tugas besar kelompok 5\tugas besar multi linked list_dosen dan mata kuliah\main.cpp
+	<iostream>
+	<stdio.h>
+	"dosen.h"
+	"matakuliah.h"
+	"relasi.h"
+	"menu.h"
+
+1491179150 d:\c++\tugas besar kelompok 5\tugas besar multi linked list_dosen dan mata kuliah\matakuliah.h
+	<stdio.h>
+	<iostream>
+
+1489374070 d:\c++\tugas besar kelompok 5\tugas besar multi linked list_dosen dan mata kuliah\relasi.h
+	"matakuliah.h"
+	"dosen.h"
+	<iostream>
+
+1491178972 d:\c++\tugas besar kelompok 5\tugas besar multi linked list_dosen dan mata kuliah\menu.h
+	"dosen.h"
+	"matakuliah.h"
+	"relasi.h"
+	<stdlib.h>
+	<conio.h>
+
+1491488874 source:d:\c++\tugas besar kelompok 5\tugas besar multi linked list_dosen dan mata kuliah\matkul.cpp
+	"matakuliah.h"
+	<iostream>
+
+1491488874 source:d:\c++\tugas besar kelompok 5\tugas besar multi linked list_dosen dan mata kuliah\menu.cpp
+	"dosen.h"
+	"matakuliah.h"
+	"relasi.h"
+	"menu.h"
+
+1490845157 source:d:\c++\tugas besar kelompok 5\tugas besar multi linked list_dosen dan mata kuliah\relasi.cpp
 	"matakuliah.h"
 	"dosen.h"
 	"relasi.h"

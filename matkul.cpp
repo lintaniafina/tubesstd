@@ -89,16 +89,16 @@ void deleteLastmatkul(List_matkul &L){
 void deleteAftermatkul(List_matkul &L, adr_matkul Prec){
     if(first(L)!=nil && Prec != nil){
         adr_matkul q=first(L);
-        while(next(q)!=nil && info(q).nama_matkul!=info(Prec).nama_matkul && info(q).deskripsi!=info(Prec).deskripsi){
+        while(next(q)!=nil && info(Prec).nama_matkul!=info(Prec).nama_matkul && info(Prec).deskripsi!=info(Prec).deskripsi){
             q=next(q);
         }
-        if(info(q).nama_matkul==info(Prec).nama_matkul && info(q).deskripsi==info(Prec).deskripsi){
+        if(info(q).nama_matkul==info(Prec).nama_matkul && info(Prec).deskripsi==info(Prec).deskripsi){
             if(next(q)==nil){
                 cout<<"Tidak berhasil menghapus data dosen"<<endl;
             }else if(next(next(q))==nil){
                 deleteLastmatkul(L);
             }else{
-                adr_matkul P=next(q);
+                adr_matkul P=q;
                 next(q)=next(P);
                 next(P)=nil;
                 dealokasimatkul(P);
@@ -116,7 +116,7 @@ void deleteMatkul(List_matkul &L, infotypematkul M){
         if(P != nil){
             if(P == first(L)){
                 deleteFirstmatkul(L);
-            }else if(next(P) == nil){
+            }else if(P==first(L)){
                 deleteLastmatkul(L);
             }else{
                 adr_matkul Q = first(L);

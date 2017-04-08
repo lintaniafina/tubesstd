@@ -175,7 +175,7 @@ void inputmatkul(List_matkul &LM,List_r &LR,List_dosen LD){
         cout << endl << "Tidak dapat menambahkan data kedalam list matkul, karena data sudah ada" << endl;
         getch();
     }else{
-        insertFirstmatkul(LM,alokasimatkul(P));
+        insertMatkul(LM,alokasimatkul(P));
         do{
             clearscreen();
             cout << "Membuat relasi antara dosen dengan mata kuliah setelah berhasil di insert" << endl;
